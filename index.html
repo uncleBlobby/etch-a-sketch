@@ -87,7 +87,7 @@
     <div id="titleDiv">etch-a-sketch</div>
     <div id="buttonBar">
     <button id="resetButton" class="gameButton" onclick="drawGrid(desiredSize)">Reset Grid</button>
-    <button id="changeColourButton" class="gameButton">Color Picker</button>
+    <button id="changeColourButton" class="gameButton">Color Picker...coming soon!</button>
     <button id="gridSizeButton" class="gameButton" onclick="changeSize()">Grid Size</button>
     </div>
     <div id="gameBox">
@@ -116,8 +116,17 @@
         console.log(gridLength);
     }
 
+    function validateInput(){
+        if (isNaN(desiredSize) || desiredSize < 16 || desiredSize > 100){
+            alert("Not a valid input. Please try again.")
+            changeSize();
+        }
+    }
+
+
     function changeSize(){
-        desiredSize = prompt("Enter a number between 16 and 100:");
+        desiredSize = prompt("Enter a number between 16 and 100 (desired grid size):");
+        validateInput();
         sizeInt = parseInt(desiredSize);
         heightVar = 640 / desiredSize;
         gridLength = auto.repeat(desiredSize);
@@ -144,14 +153,14 @@
             newDiv.classList.add("divGrid");
             newDiv.classList.add("colored");
             newDiv.addEventListener("mouseover", colorCell);
-            //heightVar=640 / desiredSize;
+            
             newDiv.style.height = heightVar + "px";
             newDiv.style.width = heightVar + "px";
             const currentDiv = document.getElementById("div1");
             const mainContainer = document.getElementById("mainContainer");
             mainContainer.style.setProperty('--mainContainer-grid-template-columns', gridLength);
             mainContainer.style.setProperty('--mainContainer-grid-template-rows', gridLength);
-            //divGrid.style.setProperty("--newDiv.height", heightVar);
+            
             mainContainer.appendChild(newDiv);
         }
     }
