@@ -22,7 +22,6 @@
     }
 
     #mainContainer {
-   
         display: grid;
         max-width: 640px;
         max-height: 640px;
@@ -33,20 +32,9 @@
         border-width: 1px;
     }
 
-
-
-    #div1 {
-        /*display: grid;
-        grid-template-columns: auto auto auto auto;*/
-        
-    }
-
     .divGrid {
         max-width: 40px;
-
         max-height: 40px;
-        
-
     }
 
     .colored:hover {
@@ -75,14 +63,8 @@
         align-items: center;
     }
 
-
-
-    
-
 </style>
-
 </head>
-
 <body onload="changeSize()">
     <div id="titleDiv">etch-a-sketch</div>
     <div id="buttonBar">
@@ -92,14 +74,9 @@
     </div>
     <div id="gameBox">
     <div id="mainContainer">
-
-
-
     </div>
     </div>
-
 </body>
-
 <script>
     let auto = "auto ";
 
@@ -123,7 +100,6 @@
         }
     }
 
-
     function changeSize(){
         desiredSize = prompt("Enter a number between 16 and 100 (desired grid size):");
         validateInput();
@@ -132,12 +108,9 @@
         gridLength = auto.repeat(desiredSize);
         drawGrid(desiredSize);
     }
-
+    
     createDimensions();
-
     drawGrid(sizeInt);
-
-
 
     function clearGrid(){
         const gridArray = Array.from(mainContainer.childNodes);
@@ -153,29 +126,17 @@
             newDiv.classList.add("divGrid");
             newDiv.classList.add("colored");
             newDiv.addEventListener("mouseover", colorCell);
-            
             newDiv.style.height = heightVar + "px";
             newDiv.style.width = heightVar + "px";
             const currentDiv = document.getElementById("div1");
             const mainContainer = document.getElementById("mainContainer");
             mainContainer.style.setProperty('--mainContainer-grid-template-columns', gridLength);
             mainContainer.style.setProperty('--mainContainer-grid-template-rows', gridLength);
-            
             mainContainer.appendChild(newDiv);
         }
     }
-
     function colorCell(e){
         e.target.style.backgroundColor = "black";
     }
-
-
-
-
-
-
 </script>
-
-
-
 </html>
