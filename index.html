@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Etch-a-Sketch v0.01</title>
+  <meta name="description" content="Etch-a-Sketch Web App">
+  <meta name="author" content="Dustin Christianson">
+
+<style>
+
+    body {
+        justify-content: center;
+        background-color: #ededed;
+        align-content: center;
+    }
+
+    #gameBox {
+        display:flex;
+        align-content: center;
+        justify-content: center;
+    }
+
+    #mainContainer {
+   
+        display: grid;
+        max-width: 640px;
+        max-height: 640px;
+        grid-template-columns: var(--mainContainer-grid-template-columns, "auto");
+        grid-template-rows: var(--mainContainer-grid-template-rows, "auto");
+        margin: 2rem auto;
+        border-style: solid;
+        border-width: 1px;
+    }
+
+
+
+    #div1 {
+        /*display: grid;
+        grid-template-columns: auto auto auto auto;*/
+        
+    }
+
+    .divGrid {
+        max-width: 40px;
+
+        max-height: 40px;
+        
+
+    }
+
+    .colored:hover {
+        background-color: magenta;
+    }
+
+    .black {
+        background-color: black;
+    }
+
+    .selected {
+        display:none;
+        background-color: black;
+    }
+
+    #titleDiv {
+        text-align:center;
+     
+        font-size:x-large;
+        margin-bottom: 2px;
+    }
+
+    #buttonBar{
+        display: flex;
+        justify-content:center;
+        align-items: center;
+    }
+
+
+
+    
+
+</style>
+
+</head>
+
+<body onload="changeSize()">
+    <div id="titleDiv">etch-a-sketch</div>
+    <div id="buttonBar">
+    <button id="resetButton" class="gameButton" onclick="drawGrid(desiredSize)">Reset Grid</button>
+    <button id="changeColourButton" class="gameButton">Color Picker</button>
+    <button id="gridSizeButton" class="gameButton" onclick="changeSize()">Grid Size</button>
+    </div>
+    <div id="gameBox">
+    <div id="mainContainer">
+
+
+
+    </div>
+    </div>
+
+</body>
+
+<script>
+    let auto = "auto ";
+
+    function setGridSize(){
+        desiredSize = prompt("Enter a number between 16 and 100:");
+        sizeInt = parseInt(desiredSize);
+        drawGrid(sizeInt);
+        var heightVar = 640 / desiredSize;
+        createDimensions();
+    }
+
+    function createDimensions(){
+        gridLength = auto.repeat(desiredSize);
+        console.log(gridLength);
+    }
+
+    function changeSize(){
+        desiredSize = prompt("Enter a number between 16 and 100:");
+        sizeInt = parseInt(desiredSize);
+        heightVar = 640 / desiredSize;
+        gridLength = auto.repeat(desiredSize);
+        drawGrid(desiredSize);
+    }
+
+    createDimensions();
+
+    drawGrid(sizeInt);
+
+
+
+    function clearGrid(){
+        const gridArray = Array.from(mainContainer.childNodes);
+        gridArray.forEach((element) => {
+        mainContainer.removeChild(element);
+        });
+    }
+
+    function drawGrid(desiredSize) {
+        clearGrid();
+        for (let i = 0; i < sizeInt * sizeInt; i++) {
+            const newDiv = document.createElement("div");
+            newDiv.classList.add("divGrid");
+            newDiv.classList.add("colored");
+            newDiv.addEventListener("mouseover", colorCell);
+            //heightVar=640 / desiredSize;
+            newDiv.style.height = heightVar + "px";
+            newDiv.style.width = heightVar + "px";
+            const currentDiv = document.getElementById("div1");
+            const mainContainer = document.getElementById("mainContainer");
+            mainContainer.style.setProperty('--mainContainer-grid-template-columns', gridLength);
+            mainContainer.style.setProperty('--mainContainer-grid-template-rows', gridLength);
+            //divGrid.style.setProperty("--newDiv.height", heightVar);
+            mainContainer.appendChild(newDiv);
+        }
+    }
+
+    function colorCell(e){
+        e.target.style.backgroundColor = "black";
+    }
+
+
+
+
+
+
+</script>
+
+
+
+</html>
